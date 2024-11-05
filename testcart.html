@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giỏ Hàng</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 20px;
+            text-align: center;
+            background-image: url(./img/pexels-photo-3165335.jpeg);
+        }
+
+        .product-list {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .product {
+            background-color: white;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            text-align: center;
+            width: 200px;
+        }
+
+        button {
+            background-color: blueviolet;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        #cart {
+            list-style: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+
+        #cart li {
+            background-color: #fff;
+            margin: 5px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #cart li button {
+            background-color: #dc3545;
+        }
+
+        #cart li button:hover {
+            background-color: #c82333;
+        }
+
+        .checkout {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 style="color: #fff;">Danh Sách Game</h1>
+    <div class="col-md-3">
+        <div class="product-list">
+            <div class="product">
+                <h3>Counter Strike 2</h3>
+                <p>Giá: 200.000đ</p>
+                <img width="150px" src="./image/image/images4.jpg">
+                <button onclick="addToCart('Counter Strike 2', 200000)">Thêm vào giỏ hàng</button>
+            </div>
+
+            <div class="product">
+                <h3>Dead by Daylight</h3>
+                <p>Giá: 799.000đ</p>
+                <img width="150px" src="./image/image/images5.jpg">
+                <button onclick="addToCart('Dead by Daylight', 799000)">Thêm vào giỏ hàng</button>
+            </div>
+
+            <div class="product">
+                <h3>Control</h3>
+                <p>Giá: 1.099.000đ</p>
+                <img width="150px" src="./image/image/images6.jpg">
+                <button onclick="addToCart('Control', 1099000)">Thêm vào giỏ hàng</button>
+            </div>
+
+            <div class="product">
+                <h3>Ghostwire Tokyo</h3>
+                <p>Giá: 599.000đ</p>
+                <img height="85px" width="150px" src="./image/image/ghostwire.jpg">
+                <button onclick="addToCart('Ghostwire Tokyo', 599000)">Thêm vào giỏ hàng</button>
+            </div>
+            <div class="product">
+                <h3>Need for Speed</h3>
+                <p>Giá: 199.000đ</p>
+                <img width="150px" src="./image/image/nfs.jpg">
+                <button onclick="addToCart('Need for Speed', 199000)">Thêm vào giỏ hàng</button>
+            </div>
+
+            <div class="product">
+                <h3>Hogward Legacy</h3>
+                <p>Giá: 699.000đ</p>
+                <img width="150px" src="./image/image/hog.jpg">
+                <button onclick="addToCart('Hogward Legacy', 699000)">Thêm vào giỏ hàng</button>
+            </div>
+
+            <div class="product">
+                <h3>Forza Horizon</h3>
+                <p>Giá: 899.000đ</p>
+                <img width="150px" src="./image/image/forza.jpg">
+                <button onclick="addToCart('Forza Horizon', 899000)">Thêm vào giỏ hàng</button>
+            </div>
+
+            <div class="product">
+                <h3>Tekken 8</h3>
+                <p>Giá: 1.599.000đ</p>
+                <img width="150px" src="./image/image/tekken.jpg">
+                <button onclick="addToCart('Tekken 8', 1599000)">Thêm vào giỏ hàng</button>
+            </div>
+
+            <div class="product">
+                <h3>The Witcher 2</h3>
+                <p>Giá: 299.000đ</p>
+                <img width="150px" src="./image/image/witcher.jpg">
+                <button onclick="addToCart('The Witcher 2', 199000)">Thêm vào giỏ hàng</button>
+            </div>
+
+            <div class="product">
+                <h3>Halo Remastered</h3>
+                <p>Giá: 199.000đ</p>
+                <img width="150px" src="./image/image/ghostwire.jpg">
+                <button onclick="addToCart('Ghostwire Tokyo', 199000)">Thêm vào giỏ hàng</button>
+            </div>
+        </div>
+    </div>
+
+        <h2>Giỏ Hàng</h2>
+        <ul id="cart"></ul>
+
+        <button class="checkout" onclick="checkout()">Thanh Toán</button>
+
+        <script>
+            function addToCart(productName, productPrice) {
+                const cart = document.getElementById('cart');
+
+                const li = document.createElement('li');
+                li.innerHTML = `
+        ${productName} - ${productPrice.toLocaleString('vi-VN')}đ
+        <button onclick="removeFromCart(this)">Xóa</button>
+      `;
+
+                cart.appendChild(li);
+            }
+
+            function removeFromCart(button) {
+                const li = button.parentElement;
+                li.remove();
+            }
+
+            function checkout() {
+                if (document.getElementById('cart').childElementCount === 0) {
+                    alert("Giỏ hàng trống! Vui lòng thêm sản phẩm.");
+                } else {
+                    alert("Thanh toán thành công!");
+                    window.location.href = "index.html"; // Chuyển về trang chủ (giả sử tên là index.html)
+                }
+            }
+        </script>
+</body>
+
+</html>
